@@ -8,7 +8,7 @@ import {
     Button,
     Divider,
 } from '@mui/material';
-import { CheckCircle, RadioButtonUnchecked } from '@mui/icons-material';
+import { CheckCircle, RadioButtonUnchecked, DeleteOutline} from '@mui/icons-material';
 
 const TaskList = ({ tasks, handleTaskClick, handleTaskDelete }) => {
     const completedTasks = tasks.filter((task) => task.completed);
@@ -44,8 +44,8 @@ const TaskList = ({ tasks, handleTaskClick, handleTaskDelete }) => {
                                             {task.text}
                                         </Typography>
                                     </Box>
-                                    <Button variant="contained" onClick={() => handleTaskDelete(task.id)}>
-                                        Delete
+                                    <Button variant="text" onClick={() => handleTaskDelete(task.id)}>
+                                        <DeleteOutline/>
                                     </Button>
                                 </Box>
                             </CardContent>
@@ -73,8 +73,8 @@ const TaskList = ({ tasks, handleTaskClick, handleTaskDelete }) => {
                                             {task.text}
                                         </Typography>
                                     </Box>
-                                    <Button variant="contained" onClick={() => handleTaskDelete(task.id)}>
-                                        Delete
+                                    <Button variant="text" onClick={() => handleTaskDelete(task.id)}>
+                                        <DeleteOutline/>
                                     </Button>
                                 </Box>
                             </CardContent>
