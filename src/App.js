@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import TaskList from './TaskList';
@@ -6,13 +6,26 @@ import TaskForm from './TaskForm';
 import './App.css';
 
 function App() {
-  const [tasks, setTasks] = useState([
-    { id: 1, text: 'Task 1', completed: false },
-    { id: 2, text: 'Task 2', completed: true },
-    { id: 3, text: 'Task 3', completed: false },
-  ]);
+  const [tasks, setTasks] = useState(() => {
+    const storedTasks = localStorage.getItem('tasks');
+    return storedTasks ? JSON.parse(storedTasks) : [];
+  });
+
 
   const [newTaskText, setNewTaskText] = useState('');
+
+  // Load tasks from local storage on component mount
+  useEffect(() => {
+    const storedTasks = localStorage.getItem('tasks');
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
+
+  // Update local storage whenever tasks change
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   const handleTaskClick = (taskId) => {
     const updatedTasks = tasks.map((task) => {
@@ -54,7 +67,11 @@ function App() {
               <Typography variant="h4">Task Tracker</Typography>
             </Box>
             <TransitionGroup>
-              <TaskList tasks={tasks} handleTaskClick={handleTaskClick} handleTaskDelete={handleTaskDelete} />
+              <TaskList
+                  tasks={tasks}
+                  handleTaskClick={handleTaskClick}
+                  handleTaskDelete={handleTaskDelete}
+              />
             </TransitionGroup>
             <Box height={20} />
             <TaskForm
