@@ -1,7 +1,23 @@
-import React from 'react';
-import { Card, CardContent, TextField, Button, Grid, Divider } from '@mui/material';
+import React, { useContext, useState } from 'react';
+import { Card, CardContent, TextField, Button, Grid } from '@mui/material';
+import { TaskContext } from './TaskContext';
 
-const TaskForm = ({ handleNewTaskSubmit, handleNewTaskChange, newTaskText }) => {
+const TaskForm = () => {
+    const { addTask } = useContext(TaskContext);
+    const [newTaskText, setNewTaskText] = useState('');
+
+    const handleNewTaskChange = (event) => {
+        setNewTaskText(event.target.value);
+    };
+
+    const handleNewTaskSubmit = (event) => {
+        event.preventDefault();
+        if (newTaskText.trim() !== '') {
+            addTask(newTaskText);
+            setNewTaskText('');
+        }
+    };
+
     return (
         <Card variant="outlined">
             <CardContent>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
     Grid,
     Card,
@@ -8,9 +8,11 @@ import {
     Button,
     Divider,
 } from '@mui/material';
-import { CheckCircle, RadioButtonUnchecked, DeleteOutline} from '@mui/icons-material';
+import { CheckCircle, RadioButtonUnchecked, DeleteOutline } from '@mui/icons-material';
+import { TaskContext } from './TaskContext';
 
-const TaskList = ({ tasks, handleTaskClick, handleTaskDelete }) => {
+const TaskList = () => {
+    const { tasks, handleTaskClick, handleTaskDelete } = useContext(TaskContext);
     const completedTasks = tasks.filter((task) => task.completed);
     const uncompletedTasks = tasks.filter((task) => !task.completed);
 
@@ -45,7 +47,7 @@ const TaskList = ({ tasks, handleTaskClick, handleTaskDelete }) => {
                                         </Typography>
                                     </Box>
                                     <Button variant="text" onClick={() => handleTaskDelete(task.id)}>
-                                        <DeleteOutline/>
+                                        <DeleteOutline />
                                     </Button>
                                 </Box>
                             </CardContent>
@@ -62,7 +64,10 @@ const TaskList = ({ tasks, handleTaskClick, handleTaskDelete }) => {
                             <CardContent>
                                 <Box display="flex" alignItems="center" justifyContent="space-between">
                                     <Box display="flex" alignItems="center" flexGrow={1}>
-                                        <CheckCircle style={{ color: 'green', marginRight: 8, cursor: 'pointer' }} onClick={() => handleTaskClick(task.id)} />
+                                        <CheckCircle
+                                            style={{ color: 'green', marginRight: 8, cursor: 'pointer' }}
+                                            onClick={() => handleTaskClick(task.id)}
+                                        />
                                         <Typography
                                             style={{
                                                 flexGrow: 1,
@@ -74,7 +79,7 @@ const TaskList = ({ tasks, handleTaskClick, handleTaskDelete }) => {
                                         </Typography>
                                     </Box>
                                     <Button variant="text" onClick={() => handleTaskDelete(task.id)}>
-                                        <DeleteOutline/>
+                                        <DeleteOutline />
                                     </Button>
                                 </Box>
                             </CardContent>
