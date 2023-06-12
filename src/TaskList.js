@@ -18,7 +18,7 @@ const TaskList = () => {
 
     return (
         <>
-            <h3>To Do:</h3>
+            <Typography variant="h6">To Do:</Typography>
             <Grid container spacing={2}>
                 {uncompletedTasks.map((task) => (
                     <Grid item key={task.id} xs={12} sm={6} md={4} lg={3}>
@@ -56,7 +56,7 @@ const TaskList = () => {
                 ))}
             </Grid>
             <Divider style={{ marginTop: '16px', marginBottom: '16px' }} />
-            <h3>Completed:</h3>
+            <Typography variant="h6">Completed:</Typography>
             <Grid container spacing={2}>
                 {completedTasks.map((task) => (
                     <Grid item key={task.id} xs={12} sm={6} md={4} lg={3}>
